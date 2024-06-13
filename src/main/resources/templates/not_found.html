@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>OOPS</title>
+    <style>
+        body img {
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .center-text {
+            text-align: center;
+            color: white;
+            background: rgba(105, 105, 105, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+            margin: 80px;
+        }
+    </style>
+</head>
+<body style="background-image: url('/images/notfound.jpg');">
+<div class="center-text">
+    <h1>Couldn't find what you're looking for :( </h1>
+    <h2>Go back <a th:href="@{/home}">Home</a>?</h2>
+</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/css/lists.css}"/>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: navbar}"></div>
+
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h2>User List</h2>
+        </div>
+        <div class="col-md-6 text-end">
+            <button class="btn btn-custom mt-3" onclick="window.location.href='/registration'">New User</button>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${page.content}">
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.surname}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.role}"></td>
+            <td>
+                <form th:method="get" th:action="@{'/users/update'}">
+                    <button class="btn btn-custom mt-3" type="submit">Edit</button>
+                    <input id="userId" name="userId" th:value="${user.id}" type="hidden"/>
+                </form>
+            </td>
+            <td>
+                <form th:method="delete" th:action="@{'/users/delete/' + ${user.id}}">
+                    <input type="hidden" name="_method" value="delete">
+                    <button class="btn btn-custom mt-3" type="submit">Delete</button>
+                </form>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:if="${page.totalPages > 1}">
+    <nav aria-label="Page navigation">
+        <ul class="pagination" th:each="pageNumber : ${pageNumbers}">
+            <li th:class="${pageNumber == page.number} ? 'page-item active' : 'page-item'">
+                <a class="page-link" th:href="@{/users(size=${page.size}, page=${pageNumber})}"
+                   th:text="${pageNumber + 1}"></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+<footer>
+    <p class="text-center">&copy; 2024 Mirna Cetinić. All rights reserved.</p>
+</footer>
+
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

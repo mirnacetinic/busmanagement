@@ -1,0 +1,49 @@
+<div th:fragment="navbar-logged" xmlns:th="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-light" style="background-color:black">
+        <ul class="nav justify-content-center">
+            <li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/ticket}">My Reservations</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div th:fragment="navbar-unlogged" xmlns:th="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-light" style="background-color:black">
+        <ul class="nav justify-content-center">
+            <li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/registration}">Register</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/login}">Login</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div th:fragment="navbar-driver" xmlns:th="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-light" style="background-color:black">
+        <ul class="nav justify-content-center">
+            <li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/routes}">Driving schedule</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/ticket}">My reservations</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/problem}">Problems I've Reported</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/problem/add}">Report a problem</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-light" style="background-color:black">
+        <ul class="nav justify-content-center">
+            <li class="nav-item"><a class="nav-link" th:href="@{/home}">Home</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/buses}">Buses</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/routes}">Routes</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/users}">Users</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/location}">Locations</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/ticket}">Tickets</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/problem}">Reported Problems</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+</div>
+
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Bus Management System</title>
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}"/>
+</head>
+<body>
+<header>
+    <h1>Bus Management System</h1>
+</header>
+
+<div sec:authorize="isAuthenticated()">
+    <div sec:authorize="hasRole('ADMIN')">
+        <div th:replace="~{fragments/nav :: navbar}"></div>
+    </div>
+    <div sec:authorize="hasRole('PASSENGER')">
+        <div th:replace="~{fragments/nav :: navbar-logged}"></div>
+    </div>
+    <div sec:authorize="hasRole('DRIVER')">
+        <div th:replace="~{fragments/nav :: navbar-driver}"></div>
+    </div>
+</div>
+<div sec:authorize="!isAuthenticated()">
+    <div th:replace="~{fragments/nav :: navbar-unlogged}"></div>
+</div>
+
+<section class="section-container">
+    <div class="img-container">
+        <img alt="Bus photo" class="img-fluid" th:src="@{/images/bus.jpg}"/>
+        <div class="section-overlay">
+            <h2 class="text-center mb-4">Where to?</h2>
+            <form id="search" method="post" th:action="@{/routes/search}">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label" for="origin">Origin:</label>
+                        <input class="form-control" id="origin" name="origin" type="text"/>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="destination">Destination:</label>
+                        <input class="form-control" id="destination" name="destination" type="text"/>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label" for="departureDate">Departure Date:</label>
+                        <input class="form-control" id="departureDate" name="departureDate" type="date"/>
+                    </div>
+                </div>
+                <button class="btn btn-custom mt-3" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Mirna Cetinić. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

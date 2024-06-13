@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Bus Management System - Edit Route</title>
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/css/forms.css}"/>
+</head>
+<body>
+<div class="alert alert-danger" th:if="${notValid}">
+    <p th:text="${notValid}"></p>
+</div>
+<div th:replace="~{fragments/nav :: navbar}"></div>
+<div class="container">
+    <h2 class="text-center mb-4" style="color: black">Edit Route</h2>
+    <form class="new-data" method="post" th:action="@{/routes/update}" th:object="${route}">
+        <input type="hidden" name="_method" value="put"/>
+        <input type="hidden" id="routeId" name="routeId" th:value="${routeId}" />
+        <div class="mb-3">
+            <label for="bus_id" class="form-label">Bus:</label>
+            <select id="bus_id" name="bus_id" required th:field="*{bus}">
+                <option th:each="bus : ${buses}" th:text="${bus.registration}" th:value="${bus.id}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('bus')}" th:errors="*{bus}" class="error"></span>
+        </div>
+        <div class="mb-3">
+            <label for="driver_id" class="form-label">Driver:</label>
+            <select id="driver_id" name="driver_id" required th:field="*{driver}">
+                <option th:each="driver : ${drivers}" th:text="${driver.name +' '+ driver.surname}"
+                        th:value="${driver.id}">
+                </option>
+            </select>
+            <span th:if="${#fields.hasErrors('driver')}" th:errors="*{driver}" class="error"></span>
+        </div>
+        <div class="mb-3">
+            <label for="origin_id" class="form-label">Origin:</label>
+            <select id="origin_id" name="origin_id" required th:field="*{origin}">
+                <option th:each="location : ${locations}" th:text="${location.city}" th:value="${location.id}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('origin')}" th:errors="*{origin}" class="error"></span>
+        </div>
+        <div class="mb-3">
+            <label for="destination_id" class="form-label">Destination:</label>
+            <select id="destination_id" name="destination_id" required th:field="*{destination}">
+                <option th:each="location : ${locations}" th:text="${location.city}" th:value="${location.id}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}" class="error"></span>
+        </div>
+        <div class="mb-3">
+            <label for="departureDate" class="form-label">Departure Date:</label>
+            <input id="departureDate" name="departureDate" required th:field="*{departureDate}"  type="date" />
+            <span th:if="${#fields.hasErrors('departureDate')}" th:errors="*{departureDate}" class="error"></span>
+        </div>
+        <div class="mb-3">
+            <label for="departureTime" class="form-label">Departure Time:</label>
+            <input id="departureTime" name="departureTime" required th:field="*{departureTime}" type="time"/>
+            <span th:if="${#fields.hasErrors('departureTime')}" th:errors="*{departureTime}" class="error"></span>
+        </div>
+        <div class="mb-3">
+            <label for="duration" class="form-label">Duration:</label>
+            <input id="duration" name="duration" required th:field="*{duration}" type="time"/>
+            <span th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}" class="error"></span>
+        </div>
+        <div class="mb-3">
+            <label for="cost" class="form-label">Cost:</label>
+            <input id="cost" name="cost" required th:field="*{cost}" type="number"/>
+            <span th:if="${#fields.hasErrors('cost')}" th:errors="*{cost}" class="error"></span>
+        </div>
+        <div>
+            <button class="btn btn-custom mt-3" type="submit">Save</button>
+        </div>
+    </form>
+</div>
+<footer class="text-center mt-5">
+    <p>&copy; 2024 Mirna Cetinić. All rights reserved.</p>
+</footer>
+
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

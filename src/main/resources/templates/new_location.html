@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>New Location</title>
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/css/forms.css}"/>
+</head>
+<body>
+<div th:replace="~{fragments/nav :: navbar}"></div>
+
+<div class="alert alert-danger" th:if="${notValid}">
+    <p th:text="${notValid}"></p>
+</div>
+<div>
+    <h2 class="text-center mb-4" style="color: black">Add New Location</h2>
+    <form class="new-data" method="post" th:action="@{/location/add}" th:object="${location}">
+        <div class="mb-3">
+            <label class="form-label" for="city">City:</label>
+            <input class="form-control" id="city" name="city" required th:field="*{city}" type="text"/>
+            <span class="text-danger" th:errors="*{city}" th:if="${#fields.hasErrors('city')}"></span>
+        </div>
+
+        <div>
+            <label class="form-label" for="country">Country:</label>
+            <input class="form-control" id="country" name="country" required th:field="*{country}" type="text"/>
+            <span class="text-danger" th:errors="*{country}" th:if="${#fields.hasErrors('country')}"></span>
+        </div>
+
+        <div>
+            <label class="form-label" for="ZIP">ZIP Code:</label>
+            <input class="form-control" id="ZIP" name="ZIP" required th:field="*{ZIP}" type="text"/>
+            <span class="text-danger" th:errors="*{ZIP}" th:if="${#fields.hasErrors('ZIP')}"></span>
+        </div>
+        <div><button class="btn btn-custom mt-3" type="submit">Add Location</button></div>
+
+    </form>
+</div>
+
+<footer style="position: fixed;bottom: 0;">
+    <p>&copy; 2024 Mirna Cetinić. All rights reserved.</p>
+</footer>
+
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

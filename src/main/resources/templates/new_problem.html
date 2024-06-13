@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Report a problem</title>
+    <link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/styles/css/forms.css}"/>
+</head>
+<body>
+<div sec:authorize="isAuthenticated()">
+    <div sec:authorize="hasRole('ADMIN')">
+        <div th:replace="~{fragments/nav :: navbar}"></div>
+    </div>
+    <div sec:authorize="hasRole('DRIVER')">
+        <div th:replace="~{fragments/nav :: navbar-driver}"></div>
+    </div>
+</div>
+
+<div class="alert alert-danger" th:if="${notValid}">
+    <p th:text="${notValid}"></p>
+</div>
+<div>
+    <h2 class="text-center mb-4 " style="color: black">Report a problem</h2>
+    <form class="new-data" method="post" th:action="@{/problem/add}" th:object="${problem}">
+        <div class="alert alert-danger" th:if="${#fields.hasErrors('description')}">
+            <p th:errors="*{description}"></p>
+        </div>
+        <div>
+            <label for="description">Describe the problem:</label>
+            <textarea cols="40" id="description" name="description" required rows="10" th:field="*{description}"></textarea>
+            <div><button class="btn btn-custom mt-3" type="submit">Report</button></div>
+        </div>
+    </form>
+</div>
+
+<footer style="position: fixed;bottom: 0;">
+    <p>&copy; 2024 Mirna Cetinić. All rights reserved.</p>
+</footer>
+
+<script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
